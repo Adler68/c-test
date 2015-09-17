@@ -1,0 +1,42 @@
+;Script for MBIND to build git_test.m
+;
+;Header
+;
+ModuleType        = VXW
+Version           = ../src-gen/git_test.ver
+Reentrant         = FALSE
+NoOnlineConfig    = FALSE
+NoOnlineInstall   = FALSE
+NoOnlineDeinstall = FALSE
+DebugInfo         = TRUE
+ErrorTolerant     = FALSE
+NoAutoInstall     = FALSE
+SystemModule      = FALSE
+IsComponent       = TRUE
+;
+;Object-Code
+;
+ObjectType        = OBJ
+ObjectMode        = NORMAL
+Version           = ../src-gen/git_test.ver
+ObjectName        = git_test.o
+;
+;Configuration-Rule
+;
+ObjectType        = BCRU
+ObjectName        = src-gen/git_test.bcr
+;
+;Component Interface Description
+;
+ObjectType        = CIX
+ObjectName        = ../src-gen/git_test.cix
+;
+;Source-Code
+;
+;ObjectType        = C-ZIP
+;ObjectName        = git_test.tgz
+
+;  Minimum required MSys version
+ObjectType         = SWREQ
+Version            = ../src-stub/msys.ver
+ObjectName         = MSYS

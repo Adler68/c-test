@@ -1,0 +1,67 @@
+header {
+	version = 1.00.01 Alpha
+}
+
+// The configuration of the control task 
+task ControlTask {
+	// Specifies which task modes the component supports.
+	// Currently only Cyclic could be used. 
+	@SELECTION (Cyclic)
+	Taskmode = Cyclic // The default Taskmode
+	@RANGE(0.2 .. 1000.0) // The possible range of the CycleTime
+	CycleTime = 10.0 // The default CycleTime in ms
+}
+
+process_interface {
+
+// Specify here your input and output variables that should be part of the
+// process image. Process image input variables are read at the beginning, 
+// process image output variables are written at the end of each cycle.
+// This variables can be connected to variables of other components in the
+// Application Developer
+    @TASK(ControlTask)
+	process_image {
+		in_vars {
+			SINT32 in1
+		}
+		out_vars {
+			SINT32 out1
+		}
+	}
+
+	// Specify here your variables that should not be part of the process image.
+	// For each input variable a method <modulename>_<variablename>_Read() will 
+	// be generated.
+	// For each output variable a method <modulename>_<variablename>_Write()
+	// will be generated. By calling this methods, the values of the inputs can 
+	// be read and the output values can be written at any time.
+	// This variables can be connected to variables of other components in the
+	// Application Developer
+	direct {
+		in_vars {
+			SINT32 in2
+		}
+		out_vars {
+			SINT32 out2
+		}
+	}
+}
+
+status_control {
+
+// Specify here the SVI variables you would like to have for your component. 
+// This variables cannot be connected in the Application Developer and 
+// could be used e.g. for variables that are needed for visualization. 
+	svi_server {
+		rw SINT32 control
+	}
+}
+
+config {
+
+// Specify here the config values you would like to have for your component.
+// Config keys must be places in containers.
+	container ownParams {
+		SINT32 configKey = 1
+	}
+}
